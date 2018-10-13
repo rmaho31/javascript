@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>This is the PromptEx file.</h1>
+    <div id="p1"></div>
+    <script>
+        let a = 5;
+        let b = 6;
+        let c = a * b;
+        let x = 5, y = 0;
+        class Student {
+            constructor(X, Y, Z) {
+                this.firstName = X;
+                this.lastName = Y;
+                this.birthYear = Z;
+            }
+            get welcomeStudent() {
+                let p1 = document.getElementById("p1");
+                let para = document.createTextNode("Welcome " + this.firstName +" "+ this.lastName + "!");
+                let br = document.createElement("br");
+                let br2 = document.createElement("br");
+                let para2 = document.createTextNode("Your Registration is complete!");
+                let para3 = document.createTextNode("Your temporary password is: " + this.firstName +"*"+ this.birthYear);
+                p1.appendChild(para);
+                p1.appendChild(br);
+                p1.appendChild(para2);
+                p1.appendChild(br2);
+                p1.appendChild(para3);
+            }
+        }
+        const student = new Student(firstName = prompt("Enter First Name:"), lastName = prompt("Enter Last Name:"), birthYear = prompt("Enter Birth Year:"));
+        student.welcomeStudent;
+        
+    </script>
+</body>
+
+</html>

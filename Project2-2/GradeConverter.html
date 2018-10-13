@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GradeConverter</title>
+</head>
+
+<body>
+    <h1>Student Grade Converter</h1>
+    <input id="i1" type="number" min="0" max="100">
+    <button id="b1" type="submit">Convert</button>
+    <label id="l1"></label>
+    <script>
+        class GradeConverter {
+            constructor() {
+                this.number = 0;
+                this.letter = "";
+
+            }
+
+            convert() {
+                if (this.number >= 88 && this.number <= 100) {
+                    this.letter = "A";
+                }
+                else if (this.number >= 80 && this.number < 88) {
+                    this.letter = "B";
+                }
+                else if (this.number >= 67 && this.number < 80) {
+                    this.letter = "C";
+                }
+                else if (this.number >= 60 && this.number < 67) {
+                    this.letter = "D";
+                }
+                else if (this.number <= 59 && this.number < 60) {
+                    this.letter = "F";
+                }
+                else {
+                    this.letter = "Not a Valid grade range!";
+                }
+            }
+        }
+        document.getElementById("b1").onclick = () => {
+            console.log("Clicked");
+            let gc = new GradeConverter();
+            gc.number = document.getElementById("i1").value;
+            console.log(document.getElementById("i1").value);
+            gc.convert();
+            document.getElementById("l1").innerHTML = gc.letter;
+        } 
+    </script>
+</body>
+
+</html>
