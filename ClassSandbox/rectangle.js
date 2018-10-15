@@ -1,9 +1,7 @@
-class Rectangle {
-    height = 15;
-    width = 10;
+class Rectangle { 
     constructor(height, width) {
-      this.height = height;
-      this.width = width;
+        this.height = height;
+        this.width = width;
     }
     // Getter
     get area() {
