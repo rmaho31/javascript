@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <title>Bowling</title>
+</head>
+
+<body>
+    <h1>Bowling Frames</h1>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th class="frame">1</th>
+                <th class="frame">2</th>
+                <th class="frame">3</th>
+                <th class="frame">4</th>
+                <th class="frame">5</th>
+                <th class="frame">6</th>
+                <th class="frame">7</th>
+                <th class="frame">8</th>
+                <th class="frame">9</th>
+                <th class="frame">10</th>
+            </thead>
+            <tbody id="frames">
+                
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <label id="sum">The Sum is: </label>
+    </div>
+    <div>
+        <label id="average">The Average is: </label>
+    </div>
+    <button id="btn1" type="button" class="btn btn-primary">Simulate Bowling Game</button>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $().ready(() => {
+            $("#btn1").click(() => {
+                console.log("clicked");
+                render(generateRandomFrameArray());
+            });
+
+            generateRandomFrameArray = () => {
+                let arr = [];
+                for (let i of $(".frame")) {
+                    arr.push(Math.floor(Math.random() * 11));
+                }
+                return arr;
+            }
+            render = (arr) => {
+                $("tbody").empty();
+                arr.map(frame => {
+                    row = "<td>"+frame+"</td>";
+                    $("#frames").append(row);
+                });
+                $("#sum").text("The Sum is: " + arr.reduce((a, b) => {
+                    return a+b;
+                }));
+                $("#average").text("The Average is: " + arr.reduce((a, b) => {
+                    return a+b;
+                })/10);
+            }
+        });
+    </script>
+</body>
+
+</html>
