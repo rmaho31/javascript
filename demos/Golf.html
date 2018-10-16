@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <title>Bowling</title>
+</head>
+
+<body>
+    <h1>Golf Course</h1>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <th class="hole">1</th>
+                <th class="hole">2</th>
+                <th class="hole">3</th>
+                <th class="hole">4</th>
+                <th class="hole">5</th>
+                <th class="hole">6</th>
+                <th class="hole">7</th>
+                <th class="hole">8</th>
+                <th class="hole">9</th>
+                <th class="hole">10</th>
+                <th class="hole">11</th>
+                <th class="hole">12</th>
+                <th class="hole">13</th>
+                <th class="hole">14</th>
+                <th class="hole">15</th>
+                <th class="hole">16</th>
+                <th class="hole">17</th>
+                <th class="hole">18</th>
+            </thead>
+            <tbody id="holes">
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <label id="sum">The Sum is: </label>
+    </div>
+    <div>
+        <label id="average">The Average is: </label>
+    </div>
+    <button id="btn1" type="button" class="btn btn-primary">Simulate Golf Game</button>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $().ready(() => {
+            $("#btn1").click(() => {
+                console.log("clicked");
+                $("body ul").remove();
+                render(generateRandomScoreArray());
+            });
+
+            generateRandomScoreArray = () => {
+                let gs1 = [];
+                $(".hole").map(x => {
+                    gs1.push(Math.floor(Math.random() * 6 + 1));
+                })
+                return gs1;
+            }
+
+            render = (gs1) => {
+                let row = "";
+                $("tbody").empty();
+                row += "<tr>"
+                gs1.map(x => {
+                    row += "<td>" + x + "</td>";
+                })
+                row += "</tr>";
+                $("#holes").append(row);
+                let sum = gs1.reduce((a, b) => {
+                    return a + b;
+                })
+                $("#sum").text("The Sum is: " + sum);
+                $("#average").text("The Average is: " + sum / 18);
+                let msg = "";
+                if (72 - sum < 0) {
+                    msg = "Damn you were " + Math.abs(72 - sum) + " over par";
+                } else if (72 - sum > 0) {
+                    msg = "Congrats you were " + (72 - sum) + " under par";
+                } else {
+                    msg = "You shot par"
+                }
+                $("body").append("<ul>Round Stats<li>" + msg + "</li></ul>");
+            }
+        });
+    </script>
+</body>
+
+</html>
