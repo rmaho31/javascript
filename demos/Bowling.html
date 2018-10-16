@@ -49,15 +49,15 @@
             });
 
             generateRandomFrameArray = () => {
-                let fb1 = [];
-                let fb2 = [];
-                for (let i of $(".frame")) {
-                    let x = Math.floor(Math.random() * 11);
-                    let y = Math.floor(Math.random() * (11-x));
-                    fb1.push(x);
-                    fb2.push(y);
-                }
-                let frame = {"fb1":fb1, "fb2":fb2};
+                // let fb1 = [];
+                // let fb2 = [];
+                // for (let i of $(".frame")) {
+                //     let x = Math.floor(Math.random() * 11);
+                //     let y = Math.floor(Math.random() * (11-x));
+                //     fb1.push(x);
+                //     fb2.push(y);
+                // }
+                let frame = {"fb1":[10,10,10,10,10,10,10,10,10,10], "fb2":[0,0,0,0,0,0,0,0,0,0]};
                 return frame;
             }
             generateFrameScore = (frame) => {
@@ -98,9 +98,8 @@
                 $("#frames").append(row);
                 
                 $("#sum").text("The Sum is: " + fs[9]);
-                $("#average").text("The Average is: " + fs.reduce((a, b) => {
-                    return a+b;
-                })/10);
+                $("#average").text("The Average is: " + fs[9]/10);
+
             }
         });
     </script>
