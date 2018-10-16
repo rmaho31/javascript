@@ -49,15 +49,15 @@
             });
 
             generateRandomFrameArray = () => {
-                // let fb1 = [];
-                // let fb2 = [];
-                // for (let i of $(".frame")) {
-                //     let x = Math.floor(Math.random() * 11);
-                //     let y = Math.floor(Math.random() * (11-x));
-                //     fb1.push(x);
-                //     fb2.push(y);
-                // }
-                let frame = {"fb1":[10,10,10,10,10,10,10,10,10,10], "fb2":[0,0,0,0,0,0,0,0,0,0]};
+                let fb1 = [];
+                let fb2 = [];
+                for (let i of $(".frame")) {
+                    let x = Math.floor(Math.random() * 11);
+                    let y = Math.floor(Math.random() * (11-x));
+                    fb1.push(x);
+                    fb2.push(y);
+                }
+                let frame = {"fb1":fb1, "fb2":fb2};
                 return frame;
             }
             generateFrameScore = (frame) => {
