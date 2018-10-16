@@ -45,26 +45,60 @@
         $().ready(() => {
             $("#btn1").click(() => {
                 console.log("clicked");
-                render(generateRandomFrameArray());
+                render(generateFrameScore(generateRandomFrameArray()));
             });
 
             generateRandomFrameArray = () => {
-                let arr = [];
+                let fb1 = [];
+                let fb2 = [];
                 for (let i of $(".frame")) {
-                    arr.push(Math.floor(Math.random() * 11));
+                    let x = Math.floor(Math.random() * 11);
+                    let y = Math.floor(Math.random() * (11-x));
+                    fb1.push(x);
+                    fb2.push(y);
                 }
-                return arr;
+                let frame = {"fb1":fb1, "fb2":fb2};
+                return frame;
             }
-            render = (arr) => {
+            generateFrameScore = (frame) => {
+                let fs = [];
+                row = "<tr>"
+                for(let i = 0; i < frame.fb1.length; i++){
+                    row += "<td>" + frame.fb1[i] + " " + frame.fb2[i] + "</td>";
+                    let x = 0;
+                    if(frame.fb1[i] === 10 && i < 9){
+                        if(frame.fb1[i+1] === 10 && i < 8){
+                            x = frame.fb1[i]+frame.fb1[i+1]+frame.fb1[i+2];
+                        } else{
+                            x = frame.fb1[i]+frame.fb1[i+1]+frame.fb2[i+1];
+                        } 
+                    } else if (frame.fb1[i]+frame.fb2[i] === 10 && i < 9){
+                        x = frame.fb1[i]+frame.fb2[i]+frame.fb1[i+1];
+                    } else {
+                        x = frame.fb1[i] + frame.fb2[i];
+                    }
+                    if(i>0){
+                        fs.push(x + fs[i-1]);
+                    } else {
+                        fs.push(x);
+                    }
+                }
+                row += "</tr>"
+                $("#frames").append(row);
+                return fs;
+            }
+
+            render = (fs) => {
                 $("tbody").empty();
-                arr.map(frame => {
-                    row = "<td>"+frame+"</td>";
-                    $("#frames").append(row);
-                });
-                $("#sum").text("The Sum is: " + arr.reduce((a, b) => {
-                    return a+b;
-                }));
-                $("#average").text("The Average is: " + arr.reduce((a, b) => {
+                row += "<tr>"
+                fs.map(x => {
+                    row += "<td>"+x+"</td>";
+                })
+                row += "</tr>";
+                $("#frames").append(row);
+                
+                $("#sum").text("The Sum is: " + fs[9]);
+                $("#average").text("The Average is: " + fs.reduce((a, b) => {
                     return a+b;
                 })/10);
             }
